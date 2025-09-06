@@ -98,6 +98,7 @@ st.markdown(
         display: inline-block;
         position: relative;
         z-index: 3;
+        white-space: nowrap;  /* ADDED to keep title in one line */
     }}
 
     .title-emoji {{
@@ -113,6 +114,9 @@ st.markdown(
         margin-top: 5px;
         margin-bottom: 1.8rem;
         white-space: nowrap;
+        text-align: center; /* ADDED to center the tagline */
+        margin-left: auto;  /* ADDED to center the tagline */
+        margin-right: auto; /* ADDED to center the tagline */
     }}
 
     .cat-img {{
@@ -264,7 +268,7 @@ st.markdown(
         }}
         .title {{
             font-size: 1.8rem;
-            white-space: normal;
+            white-space: normal;  /* Let it wrap on smaller screens */
         }}
         .tagline {{
             font-size: 1.2rem;
