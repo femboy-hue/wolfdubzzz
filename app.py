@@ -8,7 +8,7 @@ def img_to_base64(img):
     img.save(buffered, format="PNG")
     return base64.b64encode(buffered.getvalue()).decode()
 
-# Add the Google site verification meta tag
+# Google Search Console verification meta tag
 st.markdown(
     """
     <meta name="google-site-verification" content="OMIx9rfo2xbut1HKaovSKzBKfCjrmugePa6gSKlHvB8" />
