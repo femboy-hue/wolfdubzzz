@@ -8,8 +8,8 @@ def img_to_base64(img):
     img.save(buffered, format="PNG")
     return base64.b64encode(buffered.getvalue()).decode()
 
-# Load new cat image
-cat_img = Image.open("6ad72f1d-0624-4cc8-b781-29bf5e3a9685.png")
+# Load new cat image - use full path to avoid FileNotFoundError
+cat_img = Image.open("/mnt/data/6ad72f1d-0624-4cc8-b781-29bf5e3a9685.png")
 background_img = Image.open("skye.png")
 background_base64 = img_to_base64(background_img)
 
