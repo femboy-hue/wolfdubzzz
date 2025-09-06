@@ -18,4 +18,4 @@ with col1:
     st.image("profile_pic.png", caption="Dubzzz_Valo", width=250)
 
 with col2:
-    st.image("starry_sky.png", caption="Starry Night Sky", width=400)
+    st.image("starry_sky.png", caption="https://fi.pinterest.com/pin/43699058854987207/", width=400)
