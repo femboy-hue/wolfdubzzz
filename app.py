@@ -17,4 +17,5 @@ st.markdown("""
 col1, col2 = st.columns(2)
 
 with col2:
-    st.image("starry_sky.png", caption="Starry Night Vibes 🌌", width=400)
+st.image("starry_sky.png", caption="Starry Night Vibes 🌌", use_column_width=True)
+
