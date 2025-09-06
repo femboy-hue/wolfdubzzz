@@ -1,188 +1,132 @@
 import streamlit as st
 import base64
 
-# Load images and encode to base64
-def img_to_base64(img_path):
-    with open(img_path, "rb") as img_file:
-        return base64.b64encode(img_file.read()).decode()
+st.set_page_config(page_title="Dubzzz_Valo's Streaming Realm", page_icon="✨", layout="centered")
 
-starry_img_base64 = img_to_base64("starry_sky.png")
-cat_img_base64 = img_to_base64("cat.png")
+# Load your uploaded images as base64 (replace these with your actual base64 strings)
+with open("/mnt/data/bcb3a55a-5a8d-46dc-9a92-f433f4b44bcc.png", "rb") as f:
+    starry_bg_b64 = base64.b64encode(f.read()).decode()
 
-# CSS + HTML
-page_html = f"""
-<style>
-  /* Full screen background */
-  body, html {{
-    margin: 0; padding: 0; height: 100%;
-    overflow-x: hidden;
-  }}
-  .starry-bg {{
-    background-image: url("data:image/png;base64,{starry_img_base64}");
-    background-size: cover;
-    background-position: center;
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    z-index: -1;
-    filter: brightness(0.85);
-  }}
+with open("/mnt/data/2f8196b1-f2a8-4d2e-906c-83bca319fe8d.png", "rb") as f:
+    cat_img_b64 = base64.b64encode(f.read()).decode()
 
-  /* Container centered content */
-  .container {{
-    position: relative;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 40px 20px 60px 20px;
-    text-align: center;
-    color: white;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }}
+# CSS Styling with embedded images and custom fonts
+st.markdown(
+    f"""
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&display=swap');
 
-  /* Title */
-  .title {{
-    font-size: 3rem;
-    font-weight: 700;
-    background: linear-gradient(90deg, #FF4500, #FFA500);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
-    white-space: nowrap;
-    margin-bottom: 0.2rem;
-    display: inline-block;
-    vertical-align: middle;
-  }}
+    .stApp {{
+        background: url("data:image/png;base64,{starry_bg_b64}") no-repeat center center fixed;
+        background-size: cover;
+        color: #f0e8e8;
+        font-family: 'Poppins', sans-serif;
+        overflow-x: hidden;
+        min-height: 100vh;
+        padding: 40px 20px;
+        text-align: center;
+    }}
 
-  .sparkle {{
-    animation: sparkleAnim 2.5s infinite;
-    display: inline-block;
-    font-size: 1.6rem;
-    vertical-align: middle;
-    margin-left: 6px;
-  }}
-
-  @keyframes sparkleAnim {{
-    0%, 100% {{ opacity: 1; transform: rotate(0deg) scale(1); }}
-    50% {{ opacity: 0.5; transform: rotate(20deg) scale(1.3); }}
-  }}
-
-  .tagline {{
-    font-size: 1.2rem;
-    font-style: italic;
-    color: #FFD700;
-    text-shadow: 0 0 6px #FFA500;
-    margin-bottom: 30px;
-  }}
-
-  /* Cat Image */
-  .cat-img {{
-    width: 280px !important;
-    border-radius: 20px;
-    border: 4px solid #FF4500;
-    box-shadow: 0 0 15px #FF4500, 0 0 30px #FFA500;
-    margin: 0 auto 50px auto;
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-    display: block;
-  }}
-
-  .cat-img:hover {{
-    box-shadow: 0 0 25px #FF4500, 0 0 50px #FFA500;
-    transform: scale(1.1);
-  }}
-
-  /* Links */
-  .links {{
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: #87CEFA;
-    text-shadow: 0 0 6px rgba(135, 206, 250, 0.8);
-    margin-bottom: 3rem;
-  }}
-
-  .links a {{
-    color: #87CEFA;
-    text-decoration: none;
-    padding: 10px 16px;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }}
-
-  .links a:hover {{
-    text-decoration: underline;
-    text-shadow: 0 0 12px #87CEFA;
-    background-color: rgba(135, 206, 250, 0.25);
-  }}
-
-  /* Footer */
-  .footer {{
-    font-style: italic;
-    font-size: 1.6rem;
-    color: #ddd;
-    padding-top: 40px;
-    text-shadow: 0 0 8px rgba(255, 165, 0, 0.8);
-  }}
-
-  .emoji {{
-    display: inline-block;
-    animation: pulse 1.8s infinite;
-    margin-left: 8px;
-  }}
-
-  @keyframes pulse {{
-    0%, 100% {{ transform: scale(1); }}
-    50% {{ transform: scale(1.3); }}
-  }}
-
-  /* Responsive */
-  @media (max-width: 600px) {{
+    /* Title with glowing effect and underline */
     .title {{
-      font-size: 2rem;
-      white-space: normal;
+        font-size: 3rem;
+        font-weight: 800;
+        color: #ffa500;
+        text-shadow:
+            0 0 7px #ffa500,
+            0 0 20px #ff6f00,
+            0 0 30px #ff6f00;
+        border-bottom: 4px solid #ff6f00;
+        display: inline-block;
+        padding-bottom: 10px;
+        margin-bottom: 40px;
+        user-select: none;
+        letter-spacing: 2px;
     }}
+
+    /* Cat image */
     .cat-img {{
-      width: 80vw !important;
-      margin-bottom: 2rem;
+        display: block;
+        margin: 0 auto 50px auto;
+        width: 240px;
+        border-radius: 20px;
+        box-shadow: 0 0 25px 8px rgba(255, 111, 0, 0.75);
+        transition: transform 0.3s ease;
     }}
-    .links {{
-      gap: 20px;
-      font-size: 1.2rem;
-      flex-wrap: wrap;
-      margin-bottom: 2rem;
+
+    .cat-img:hover {{
+        transform: scale(1.1);
     }}
+
+    /* Social links container */
+    .social-links {{
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #d7d7d7;
+        user-select: none;
+        margin-bottom: 70px;
+    }}
+
+    .social-links a {{
+        color: #d7d7d7;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }}
+
+    .social-links a:hover {{
+        color: #ffa500;
+        text-shadow: 0 0 10px #ff8c00;
+        cursor: pointer;
+    }}
+
+    /* Footer text */
     .footer {{
-      font-size: 1.4rem;
-      padding-top: 30px;
+        font-style: italic;
+        font-size: 1.1rem;
+        color: #ffb84d;
+        text-shadow: 0 0 10px #ff8c00;
+        user-select: none;
+        margin-top: 20px;
     }}
-  }}
-</style>
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 
-<div class="starry-bg"></div>
-<div class="container">
-  <div>
-    <span class="title">Dubzzz_Valo’s Streaming Galaxy</span><span class="sparkle">✨</span>
-  </div>
-  <div class="tagline">Your Gateway to Epic Plays!</div>
+# Title
+st.markdown('<h1 class="title">Dubzzz_Valo\'s Streaming Realm — Enter the Purrfect Stream!</h1>', unsafe_allow_html=True)
 
-  <img src="data:image/png;base64,{cat_img_base64}" alt="Cat" class="cat-img" />
+# Cat image
+st.markdown(
+    f'<img class="cat-img" src="data:image/png;base64,{cat_img_b64}" alt="Cat profile picture">',
+    unsafe_allow_html=True,
+)
 
-  <div class="links">
-    <a href="https://youtube.com" target="_blank">🎥 YouTube</a>
-    <a href="https://instagram.com" target="_blank">📸 Instagram</a>
-    <a href="https://tiktok.com" target="_blank">🎵 TikTok</a>
-    <a href="https://twitch.tv" target="_blank">🎮 Twitch</a>
-  </div>
+# Social media links with emojis as icons
+st.markdown(
+    """
+    <div class="social-links">
+        <a href="https://www.youtube.com/" target="_blank">🎥 <strong>YouTube</strong></a>
+        <a href="https://www.instagram.com/" target="_blank">📸 <strong>Instagram</strong></a>
+        <a href="https://www.tiktok.com/" target="_blank">🎵 <strong>TikTok</strong></a>
+        <a href="https://www.twitch.tv/" target="_blank">🎮 <strong>Twitch</strong></a>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
-  <div class="footer">
-    Thanks for dropping by — don’t forget to hit that follow! <span class="emoji">🙌</span>
-  </div>
-</div>
-"""
-
-# Display the page in Streamlit
-st.markdown(page_html, unsafe_allow_html=True)
+# Footer
+st.markdown(
+    """
+    <div class="footer">
+        Thanks for swinging by! Catch you soon for more epic streams. 🙏🔥
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
