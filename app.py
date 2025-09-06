@@ -8,10 +8,8 @@ def img_to_base64(img):
     img.save(buffered, format="PNG")
     return base64.b64encode(buffered.getvalue()).decode()
 
-# Load images
 cat_img = Image.open("cat.png")
 background_img = Image.open("skye.png")
-
 background_base64 = img_to_base64(background_img)
 
 st.markdown(
@@ -40,22 +38,18 @@ st.markdown(
     .title {{
         font-size: 3rem;
         font-weight: 700;
-        color: #FF4500;
-        margin-bottom: 1.5rem;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        justify-content: center;
-        text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
-    }}
-    .title .star {{
-        font-size: 2.5rem;
+        background: linear-gradient(90deg, #FF4500, #FFA500);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+        margin-bottom: 2rem;
+        white-space: nowrap; /* keep title in one line */
     }}
     .cat-img {{
         width: 300px !important;
         border-radius: 20px;
-        box-shadow: 0 8px 20px rgba(255, 69, 0, 0.7);
-        margin-bottom: 1.5rem;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6); /* subtle shadow instead of glow */
+        margin-bottom: 2rem;
         transition: transform 0.3s ease;
     }}
     .cat-img:hover {{
@@ -66,7 +60,7 @@ st.markdown(
         gap: 40px;
         justify-content: center;
         font-size: 1.4rem;
-        margin-bottom: 2rem;
+        margin-bottom: 3rem; /* more spacing above footer */
     }}
     .links a {{
         color: #87CEFA;
@@ -80,7 +74,7 @@ st.markdown(
     }}
     .footer {{
         font-style: italic;
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         color: #ddd;
         padding-bottom: 20px;
     }}
@@ -89,21 +83,20 @@ st.markdown(
     @media (max-width: 600px) {{
         .title {{
             font-size: 2rem;
-        }}
-        .title .star {{
-            font-size: 2rem;
+            white-space: normal;
         }}
         .cat-img {{
             width: 80vw !important;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }}
         .links {{
             gap: 20px;
             font-size: 1.1rem;
             flex-wrap: wrap;
+            margin-bottom: 2rem;
         }}
         .footer {{
-            font-size: 1rem;
+            font-size: 1.1rem;
             padding-bottom: 40px;
         }}
     }}
@@ -112,16 +105,13 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Main container with flexbox for center alignment
 st.markdown('<div class="center-container">', unsafe_allow_html=True)
 
-# Title + star emoji side by side
-st.markdown('<div class="title">🐾 Dubzzz_Valo\'s Streaming Hub <span class="star">🌟</span></div>', unsafe_allow_html=True)
+# Title without star emoji
+st.markdown('<div class="title">🐾 Dubzzz_Valo\'s Streaming Hub</div>', unsafe_allow_html=True)
 
-# Cat image with class for styling
 st.markdown(f'<img src="data:image/png;base64,{img_to_base64(cat_img)}" class="cat-img" alt="Cat Image" />', unsafe_allow_html=True)
 
-# Social media links spaced horizontally with hover effect
 st.markdown(
     """
     <div class="links">
