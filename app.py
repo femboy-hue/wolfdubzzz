@@ -295,4 +295,41 @@ st.markdown(
         <span class="star">✨</span>
         <span class="heart">💖</span>
         <span class="play">▶️</span>
+        <span class="bolt">⚡</span>
+        <span class="star">🌟</span>
+        <span class="heart">💗</span>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+st.markdown('<div class="container">', unsafe_allow_html=True)
+
+# Emojis inline with title
+st.markdown(
+    """
+    <div class="emoji-bar">
+        <span>⚡</span>
+        <span>❤️</span>
+        <span>💔</span>
+        <span>▶️</span>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+# Title centered, smaller, and in one line
+st.markdown(
+    """
+    <div class="title">
+        DUBZZZ_VALO'S STREAMING HUB
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+# Subtitle larger and centered
+st.markdown(
+    """
+    <div class="tagline">
        
