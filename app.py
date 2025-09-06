@@ -15,7 +15,29 @@ background_base64 = img_to_base64(background_img)
 st.markdown(
     f"""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Pacifico&display=swap');
+    @keyframes neon-flicker {{
+        0%, 100% {{ text-shadow:
+            0 0 5px #00ffff,
+            0 0 10px #00ffff,
+            0 0 20px #00ffff,
+            0 0 40px #0ff,
+            0 0 80px #0ff,
+            0 0 90px #0ff,
+            0 0 100px #0ff,
+            0 0 150px #0ff; 
+            color: #0ff; }}
+        50% {{ text-shadow:
+            0 0 2px #00ffff,
+            0 0 5px #00ffff,
+            0 0 10px #00ffff,
+            0 0 20px #0ff; 
+            color: #a0ffff; }}
+    }}
+
+    @keyframes fadeGlow {{
+        0% {{ opacity: 0; text-shadow: none; }}
+        100% {{ opacity: 1; text-shadow: 0 0 10px #0ff; }}
+    }}
 
     .stApp {{
         background-image: url("data:image/png;base64,{background_base64}");
@@ -25,8 +47,7 @@ st.markdown(
         height: 100vh;
         margin: 0;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        color: white;
-        text-shadow: 2px 2px 8px rgba(0,0,0,0.85);
+        color: #0ff;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -39,25 +60,16 @@ st.markdown(
     .title {{
         font-size: 3.5rem;
         font-weight: 900;
-        background: linear-gradient(45deg, #FF6B6B, #FFD93D, #6BCB77, #4D96FF);
-        background-size: 300% 300%;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: gradientShift 8s ease infinite;
-        text-shadow: 0 0 10px rgba(255,255,255,0.8);
+        text-transform: uppercase;
+        animation: neon-flicker 2.5s infinite alternate;
         margin-bottom: 2rem;
-        white-space: nowrap;
+        letter-spacing: 0.1em;
         user-select: none;
-    }}
-    @keyframes gradientShift {{
-        0% {{background-position: 0% 50%;}}
-        50% {{background-position: 100% 50%;}}
-        100% {{background-position: 0% 50%;}}
     }}
     .cat-img {{
         width: 300px !important;
         border-radius: 20px;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+        box-shadow: 0 6px 15px rgba(0, 255, 255, 0.7);
         margin-bottom: 2rem;
         transition: transform 0.3s ease;
         display: block;
@@ -66,6 +78,7 @@ st.markdown(
     }}
     .cat-img:hover {{
         transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(0, 255, 255, 1);
     }}
     .links {{
         display: flex;
@@ -73,16 +86,15 @@ st.markdown(
         gap: 40px;
         font-size: 1.4rem;
         margin-bottom: 3rem;
-        font-weight: 600;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        color: #87CEFA;
-        text-shadow: 0 0 4px rgba(135, 206, 250, 0.7);
+        font-weight: 700;
+        color: #0ff;
+        text-shadow: 0 0 6px #0ff;
     }}
     .links a {{
-        color: #87CEFA;
+        color: #0ff;
         text-decoration: none;
         padding: 8px 12px;
-        border-radius: 6px;
+        border-radius: 8px;
         transition: all 0.3s ease;
         display: flex;
         align-items: center;
@@ -90,38 +102,19 @@ st.markdown(
     }}
     .links a:hover {{
         text-decoration: underline;
-        text-shadow: 0 0 10px #87CEFA;
-        background-color: rgba(135, 206, 250, 0.2);
+        text-shadow: 0 0 15px #0ff;
+        background-color: rgba(0, 255, 255, 0.15);
     }}
     .footer {{
-        font-family: 'Dancing Script', cursive;
-        font-style: normal;
-        font-size: 1.8rem;
-        color: #FFD700;
-        padding-top: 20px;
-        text-shadow:
-            0 0 5px #FFD700,
-            0 0 10px #FFA500,
-            0 0 20px #FF8C00;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-style: italic;
+        font-size: 1.5rem;
+        color: #0ff;
+        animation: fadeGlow 3s ease forwards;
+        opacity: 0;
         user-select: none;
-        animation: glow 2.5s ease-in-out infinite alternate;
     }}
-    @keyframes glow {{
-        from {{
-            text-shadow:
-                0 0 5px #FFD700,
-                0 0 10px #FFA500,
-                0 0 20px #FF8C00;
-            color: #FFD700;
-        }}
-        to {{
-            text-shadow:
-                0 0 10px #FFFACD,
-                0 0 15px #FFA500,
-                0 0 30px #FF4500;
-            color: #FFFACD;
-        }}
-    }}
+
     @media (max-width: 600px) {{
         .title {{
             font-size: 2.5rem;
@@ -138,7 +131,7 @@ st.markdown(
             margin-bottom: 2rem;
         }}
         .footer {{
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             padding-top: 30px;
         }}
     }}
@@ -149,7 +142,7 @@ st.markdown(
 
 st.markdown('<div class="container">', unsafe_allow_html=True)
 
-st.markdown('<div class="title">🐾 Dubzzz_Valo\'s Streaming Hub</div>', unsafe_allow_html=True)
+st.markdown('<div class="title">🐾 DUBZZZ_VALO\'S STREAMING HUB</div>', unsafe_allow_html=True)
 
 st.markdown(f'<img src="data:image/png;base64,{img_to_base64(cat_img)}" class="cat-img" alt="Cat Image" />', unsafe_allow_html=True)
 
@@ -162,7 +155,7 @@ st.markdown(
         <a href="https://twitch.tv" target="_blank">🎮 Twitch</a>
     </div>
     <div class="footer">
-        Thanks for stopping by! Follow for more awesome streams 🙏✨
+        Thanks for stopping by! Catch more epic streams soon 🙏✨
     </div>
     """,
     unsafe_allow_html=True,
