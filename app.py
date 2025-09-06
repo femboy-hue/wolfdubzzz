@@ -69,3 +69,72 @@ st.markdown(
         margin-bottom: 2rem;
     }}
     .links a {{
+        color: #87CEFA;
+        text-decoration: none;
+        padding: 8px 12px;
+        border-radius: 6px;
+        transition: background-color 0.2s ease;
+    }}
+    .links a:hover {{
+        background-color: rgba(135, 206, 250, 0.3);
+    }}
+    .footer {{
+        font-style: italic;
+        font-size: 1.2rem;
+        color: #ddd;
+        padding-bottom: 20px;
+    }}
+
+    /* Responsive */
+    @media (max-width: 600px) {{
+        .title {{
+            font-size: 2rem;
+        }}
+        .title .star {{
+            font-size: 2rem;
+        }}
+        .cat-img {{
+            width: 80vw !important;
+            margin-bottom: 1rem;
+        }}
+        .links {{
+            gap: 20px;
+            font-size: 1.1rem;
+            flex-wrap: wrap;
+        }}
+        .footer {{
+            font-size: 1rem;
+            padding-bottom: 40px;
+        }}
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+# Main container with flexbox for center alignment
+st.markdown('<div class="center-container">', unsafe_allow_html=True)
+
+# Title + star emoji side by side
+st.markdown('<div class="title">🐾 Dubzzz_Valo\'s Streaming Hub <span class="star">🌟</span></div>', unsafe_allow_html=True)
+
+# Cat image with class for styling
+st.markdown(f'<img src="data:image/png;base64,{img_to_base64(cat_img)}" class="cat-img" alt="Cat Image" />', unsafe_allow_html=True)
+
+# Social media links spaced horizontally with hover effect
+st.markdown(
+    """
+    <div class="links">
+        🎥 <a href="https://youtube.com" target="_blank">YouTube</a>
+        📸 <a href="https://instagram.com" target="_blank">Instagram</a>
+        🎵 <a href="https://tiktok.com" target="_blank">TikTok</a>
+        🎮 <a href="https://twitch.tv" target="_blank">Twitch</a>
+    </div>
+    <div class="footer">
+        Thanks for stopping by! Follow for more content 🙏
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+st.markdown('</div>', unsafe_allow_html=True)
