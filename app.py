@@ -8,7 +8,8 @@ def img_to_base64(img):
     img.save(buffered, format="PNG")
     return base64.b64encode(buffered.getvalue()).decode()
 
-cat_img = Image.open("cat.png")
+# Load new cat image
+cat_img = Image.open("6ad72f1d-0624-4cc8-b781-29bf5e3a9685.png")
 background_img = Image.open("skye.png")
 background_base64 = img_to_base64(background_img)
 
@@ -76,36 +77,49 @@ st.markdown(
         z-index: 2;
     }}
 
+    /* Emoji container above title */
+    .emoji-bar {{
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        font-size: 2rem;
+        margin-bottom: 10px;
+        filter: drop-shadow(0 0 4px #00ffff);
+    }}
+
     .title {{
-        font-size: 2.4rem; /* smaller size */
+        font-size: 2.4rem;
         font-weight: 900;
         color: #00f9ff;
         text-transform: uppercase;
         letter-spacing: 4px;
         text-shadow: 0 0 10px #00f9ff, 0 0 30px #00f9ff;
-        margin-bottom: 0.5rem;
-        position: relative;
+        margin-bottom: 0.3rem;
         display: inline-block;
+        position: relative;
         z-index: 3;
+    }}
+
+    .title-emoji {{
+        margin: 0 6px;
+        filter: drop-shadow(0 0 6px #ff0080);
     }}
 
     .tagline {{
         font-family: 'Brush Script MT', cursive;
-        font-size: 1.8rem;
-        color: #ff0080;
-        text-shadow: 0 0 6px #ff0080;
-        margin-bottom: 2rem;
-        text-align: right;       /* align right */
-        max-width: 50%;          /* limit width to about half container */
-        margin-left: auto;       /* push it to the right */
-        margin-right: 0;
+        font-size: 1.6rem;
+        color: #00ffff;
+        text-shadow: 0 0 8px #00ffff, 0 0 20px #00ffff;
+        margin-top: 5px;
+        margin-bottom: 1.8rem;
+        white-space: nowrap;
     }}
 
     .cat-img {{
         width: 300px !important;
         border-radius: 20px;
         box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
-        margin-bottom: 2rem;
+        margin-bottom: 2.5rem;
         transition: transform 0.3s ease;
         display: block;
         margin-left: auto;
@@ -154,10 +168,10 @@ st.markdown(
     .footer {{
         font-style: italic;
         font-size: 1.6rem;
-        color: #ff00aa;
+        color: #00ffff;
         padding-top: 20px;
         animation: glowCycle 5s ease-in-out infinite;
-        text-shadow: 0 0 15px #ff00aa;
+        text-shadow: 0 0 15px #00ffff;
         position: relative;
         z-index: 2;
     }}
@@ -244,14 +258,18 @@ st.markdown(
 
     /* Responsive */
     @media (max-width: 600px) {{
+        .emoji-bar {{
+            font-size: 1.6rem;
+            gap: 10px;
+        }}
         .title {{
-            font-size: 2rem;
+            font-size: 1.8rem;
             white-space: normal;
         }}
         .tagline {{
-            max-width: 100%;
-            text-align: center;
-            margin-left: 0;
+            font-size: 1.2rem;
+            white-space: normal;
+            margin-bottom: 1.2rem;
         }}
         .cat-img {{
             width: 80vw !important;
@@ -285,12 +303,43 @@ st.markdown(
 
 st.markdown('<div class="container">', unsafe_allow_html=True)
 
-st.markdown('<div class="title">🐾 DUBZZZ_VALO\'S STREAMING HUB</div>', unsafe_allow_html=True)
+# Emojis above title - consistent set (lightning, hearts, play)
+st.markdown(
+    """
+    <div class="emoji-bar">
+        <span>⚡</span>
+        <span>❤️</span>
+        <span>💔</span>
+        <span>▶️</span>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
-st.markdown('<div class="tagline">Where Every Stream is Legendary ✨</div>', unsafe_allow_html=True)
+# Title with consistent emojis integrated and no line break
+st.markdown(
+    """
+    <div class="title">
+        ⚡ <span class="title-emoji">❤️</span> DUBZZZ_VALO'S STREAMING HUB <span class="title-emoji">💔</span> ⚡
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
+# Subtitle with neon glow, no background highlight, smaller font, closer spacing
+st.markdown(
+    """
+    <div class="tagline">
+        Where Every Stream is Legendary ✨
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+# New cat image
 st.markdown(f'<img src="data:image/png;base64,{img_to_base64(cat_img)}" class="cat-img" alt="Cat Image" />', unsafe_allow_html=True)
 
+# Links row
 st.markdown(
     """
     <div class="links">
@@ -299,6 +348,13 @@ st.markdown(
         <a href="https://tiktok.com" target="_blank">🎵 TikTok</a>
         <a href="https://twitch.tv" target="_blank">🎮 Twitch</a>
     </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+# Footer with softer neon cyan glow color
+st.markdown(
+    """
     <div class="footer">
         Thanks for stopping by! Catch more epic streams soon 🙏✨
     </div>
