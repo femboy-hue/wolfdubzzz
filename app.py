@@ -1,132 +1,142 @@
 import streamlit as st
+from PIL import Image
 import base64
+from io import BytesIO
 
-st.set_page_config(page_title="Dubzzz_Valo's Streaming Realm", page_icon="✨", layout="centered")
+def img_to_base64(img):
+    buffered = BytesIO()
+    img.save(buffered, format="PNG")
+    return base64.b64encode(buffered.getvalue()).decode()
 
-# Load your uploaded images as base64 (replace these with your actual base64 strings)
-with open("/mnt/data/bcb3a55a-5a8d-46dc-9a92-f433f4b44bcc.png", "rb") as f:
-    starry_bg_b64 = base64.b64encode(f.read()).decode()
+cat_img = Image.open("cat.png")
+background_img = Image.open("skye.png")
+background_base64 = img_to_base64(background_img)
 
-with open("/mnt/data/2f8196b1-f2a8-4d2e-906c-83bca319fe8d.png", "rb") as f:
-    cat_img_b64 = base64.b64encode(f.read()).decode()
-
-# CSS Styling with embedded images and custom fonts
 st.markdown(
     f"""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&display=swap');
-
     .stApp {{
-        background: url("data:image/png;base64,{starry_bg_b64}") no-repeat center center fixed;
+        background-image: url("data:image/png;base64,{background_base64}");
         background-size: cover;
-        color: #f0e8e8;
-        font-family: 'Poppins', sans-serif;
-        overflow-x: hidden;
-        min-height: 100vh;
-        padding: 40px 20px;
-        text-align: center;
-    }}
-
-    /* Title with glowing effect and underline */
-    .title {{
-        font-size: 3rem;
-        font-weight: 800;
-        color: #ffa500;
-        text-shadow:
-            0 0 7px #ffa500,
-            0 0 20px #ff6f00,
-            0 0 30px #ff6f00;
-        border-bottom: 4px solid #ff6f00;
-        display: inline-block;
-        padding-bottom: 10px;
-        margin-bottom: 40px;
-        user-select: none;
-        letter-spacing: 2px;
-    }}
-
-    /* Cat image */
-    .cat-img {{
-        display: block;
-        margin: 0 auto 50px auto;
-        width: 240px;
-        border-radius: 20px;
-        box-shadow: 0 0 25px 8px rgba(255, 111, 0, 0.75);
-        transition: transform 0.3s ease;
-    }}
-
-    .cat-img:hover {{
-        transform: scale(1.1);
-    }}
-
-    /* Social links container */
-    .social-links {{
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh;
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: white;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.85);
         display: flex;
         justify-content: center;
-        gap: 50px;
-        font-size: 1.3rem;
-        font-weight: 600;
-        color: #d7d7d7;
-        user-select: none;
-        margin-bottom: 70px;
+        align-items: center;
     }}
-
-    .social-links a {{
-        color: #d7d7d7;
+    .container {{
+        text-align: center;
+        max-width: 800px;
+        padding: 20px;
+    }}
+    .title {{
+        font-size: 3rem;
+        font-weight: 700;
+        background: linear-gradient(90deg, #FF4500, #FFA500);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+        margin-bottom: 2rem;
+        white-space: nowrap; /* keep title in one line */
+        margin-left: auto;
+        margin-right: auto;
+    }}
+    .cat-img {{
+        width: 300px !important;
+        border-radius: 20px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+        margin-bottom: 2rem;
+        transition: transform 0.3s ease;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }}
+    .cat-img:hover {{
+        transform: scale(1.05);
+    }}
+    .links {{
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        font-size: 1.4rem;
+        margin-bottom: 3rem;
+        font-weight: 600;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #87CEFA;
+        text-shadow: 0 0 4px rgba(135, 206, 250, 0.7);
+    }}
+    .links a {{
+        color: #87CEFA;
         text-decoration: none;
-        transition: color 0.3s ease;
+        padding: 8px 12px;
+        border-radius: 6px;
+        transition: all 0.3s ease;
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 6px;
     }}
-
-    .social-links a:hover {{
-        color: #ffa500;
-        text-shadow: 0 0 10px #ff8c00;
-        cursor: pointer;
+    .links a:hover {{
+        text-decoration: underline;
+        text-shadow: 0 0 10px #87CEFA;
+        background-color: rgba(135, 206, 250, 0.2);
     }}
-
-    /* Footer text */
     .footer {{
         font-style: italic;
-        font-size: 1.1rem;
-        color: #ffb84d;
-        text-shadow: 0 0 10px #ff8c00;
-        user-select: none;
-        margin-top: 20px;
+        font-size: 1.4rem;
+        color: #ddd;
+        padding-top: 20px;
+        text-shadow: 0 0 6px rgba(255, 165, 0, 0.7);
+    }}
+
+    @media (max-width: 600px) {{
+        .title {{
+            font-size: 2rem;
+            white-space: normal;
+        }}
+        .cat-img {{
+            width: 80vw !important;
+            margin-bottom: 1.5rem;
+        }}
+        .links {{
+            gap: 20px;
+            font-size: 1.1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }}
+        .footer {{
+            font-size: 1.2rem;
+            padding-top: 30px;
+        }}
     }}
     </style>
     """,
     unsafe_allow_html=True,
 )
 
-# Title
-st.markdown('<h1 class="title">Dubzzz_Valo\'s Streaming Realm — Enter the Purrfect Stream!</h1>', unsafe_allow_html=True)
+st.markdown('<div class="container">', unsafe_allow_html=True)
 
-# Cat image
-st.markdown(
-    f'<img class="cat-img" src="data:image/png;base64,{cat_img_b64}" alt="Cat profile picture">',
-    unsafe_allow_html=True,
-)
+st.markdown('<div class="title">🐾 Dubzzz_Valo\'s Streaming Hub</div>', unsafe_allow_html=True)
 
-# Social media links with emojis as icons
+st.markdown(f'<img src="data:image/png;base64,{img_to_base64(cat_img)}" class="cat-img" alt="Cat Image" />', unsafe_allow_html=True)
+
 st.markdown(
     """
-    <div class="social-links">
-        <a href="https://www.youtube.com/" target="_blank">🎥 <strong>YouTube</strong></a>
-        <a href="https://www.instagram.com/" target="_blank">📸 <strong>Instagram</strong></a>
-        <a href="https://www.tiktok.com/" target="_blank">🎵 <strong>TikTok</strong></a>
-        <a href="https://www.twitch.tv/" target="_blank">🎮 <strong>Twitch</strong></a>
+    <div class="links">
+        <a href="https://youtube.com" target="_blank">🎥 YouTube</a>
+        <a href="https://instagram.com" target="_blank">📸 Instagram</a>
+        <a href="https://tiktok.com" target="_blank">🎵 TikTok</a>
+        <a href="https://twitch.tv" target="_blank">🎮 Twitch</a>
     </div>
-    """,
-    unsafe_allow_html=True,
-)
-
-# Footer
-st.markdown(
-    """
     <div class="footer">
-        Thanks for swinging by! Catch you soon for more epic streams. 🙏🔥
+        Thanks for stopping by! Follow for more content 🙏
     </div>
     """,
     unsafe_allow_html=True,
 )
+
+st.markdown('</div>', unsafe_allow_html=True)
