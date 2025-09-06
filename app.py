@@ -12,8 +12,9 @@ def img_to_base64(img):
 cat_img = Image.open("cat.png")
 background_img = Image.open("skye.png")
 background_base64 = img_to_base64(background_img)
+cat_base64 = img_to_base64(cat_img)
 
-# CSS styles with your requested changes
+# CSS styles with merged improvements
 st.markdown(
     f"""
     <style>
@@ -161,7 +162,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Subtitle text
+# Subtitle text with sparkle emoji
 st.markdown(
     """
     <div class="tagline">Where Every Stream is Legendary ✨</div>
@@ -169,9 +170,9 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Display cat image with class for styling
+# Cat image with CSS styling (using base64 embedded img tag)
 st.markdown(
-    f'<img src="data:image/png;base64,{img_to_base64(cat_img)}" class="cat-img" alt="Cat Image" />',
+    f'<img src="data:image/png;base64,{cat_base64}" class="cat-img" alt="Cat Image" />',
     unsafe_allow_html=True,
 )
 
