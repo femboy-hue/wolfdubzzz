@@ -14,7 +14,6 @@ background_img = Image.open("skye.png")
 
 background_base64 = img_to_base64(background_img)
 
-# Apply CSS styles
 st.markdown(
     f"""
     <style>
@@ -25,62 +24,48 @@ st.markdown(
         background-repeat: no-repeat;
         height: 100vh;
         margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: white;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.85);
     }}
     .center-container {{
         height: 100vh;
         display: flex;
         flex-direction: column;
-        justify-content: center;  /* vertical centering */
-        align-items: center;      /* horizontal centering */
-        color: white;
+        justify-content: center;
+        align-items: center;
         text-align: center;
-        text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
+        padding: 0 20px;
     }}
     .title {{
         font-size: 3rem;
         font-weight: 700;
         color: #FF4500;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        justify-content: center;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
+    }}
+    .title .star {{
+        font-size: 2.5rem;
+    }}
+    .cat-img {{
+        width: 300px !important;
+        border-radius: 20px;
+        box-shadow: 0 8px 20px rgba(255, 69, 0, 0.7);
+        margin-bottom: 1.5rem;
+        transition: transform 0.3s ease;
+    }}
+    .cat-img:hover {{
+        transform: scale(1.05);
+    }}
+    .links {{
+        display: flex;
+        gap: 40px;
+        justify-content: center;
+        font-size: 1.4rem;
         margin-bottom: 2rem;
     }}
     .links a {{
-        margin: 0 15px;
-        font-size: 1.3rem;
-        color: #87CEFA;
-        text-decoration: none;
-    }}
-    .footer {{
-        margin-top: 2rem;
-        font-style: italic;
-        font-size: 1rem;
-    }}
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-
-# Main container
-st.markdown('<div class="center-container">', unsafe_allow_html=True)
-
-# Title on top
-st.markdown('<div class="title">🐾 Dubzzz_Valo\'s Streaming Hub 🌟</div>', unsafe_allow_html=True)
-
-# Centered cat image
-st.image(cat_img, width=250, caption="Cat", output_format="PNG")
-
-# Links below cat image
-st.markdown(
-    """
-    <div class="links">
-        🎥 <a href="https://youtube.com" target="_blank">YouTube</a>
-        📸 <a href="https://instagram.com" target="_blank">Instagram</a>
-        🎵 <a href="https://tiktok.com" target="_blank">TikTok</a>
-        🎮 <a href="https://twitch.tv" target="_blank">Twitch</a>
-    </div>
-    <div class="footer">
-        Thanks for stopping by! Follow for more content 🙏
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-
-st.markdown('</div>', unsafe_allow_html=True)
