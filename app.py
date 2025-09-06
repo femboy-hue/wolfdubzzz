@@ -13,46 +13,11 @@ cat_img = Image.open("cat.png")
 background_img = Image.open("skye.png")
 background_base64 = img_to_base64(background_img)
 
+# CSS styles with your requested changes
 st.markdown(
     f"""
     <style>
-    /* Slower and smoother emoji float animation */
-    @keyframes floatUp {{
-        0% {{
-            transform: translateY(0) translateX(0);
-            opacity: 1;
-        }}
-        100% {{
-            transform: translateY(-60px) translateX(15px);
-            opacity: 0;
-        }}
-    }}
-
-    @keyframes floatSide {{
-        0% {{
-            transform: translateX(0);
-            opacity: 1;
-        }}
-        50% {{
-            transform: translateX(6px);
-        }}
-        100% {{
-            transform: translateX(0);
-            opacity: 1;
-        }}
-    }}
-
-    @keyframes glowCycle {{
-        0%, 100% {{
-            text-shadow: 0 0 8px #00f9ff, 0 0 20px #00f9ff;
-            color: #00f9ff;
-        }}
-        50% {{
-            text-shadow: 0 0 20px #ff007f, 0 0 40px #ff007f;
-            color: #ff007f;
-        }}
-    }}
-
+    /* Background */
     .stApp {{
         background-image: url("data:image/png;base64,{background_base64}");
         background-size: cover;
@@ -71,62 +36,59 @@ st.markdown(
     }}
 
     .container {{
-        text-align: center;
         max-width: 800px;
-        padding: 30px 20px 40px 20px; /* More padding bottom */
+        text-align: center;
+        padding: 20px;
         position: relative;
         z-index: 2;
     }}
 
-    /* Emoji container above title */
+    /* Emoji bar inline with title */
     .emoji-bar {{
-        display: flex;
-        justify-content: center;
-        gap: 18px;
+        display: inline-flex;
+        gap: 12px;
         font-size: 1.8rem;
-        margin-bottom: 14px;
-        filter: drop-shadow(0 0 3px #00ffff);
+        margin-bottom: 12px;
+        filter: drop-shadow(0 0 4px #00ffff);
+        vertical-align: middle;
+        justify-content: center;
+        width: 100%;
     }}
 
+    /* Title */
     .title {{
-        font-size: 2.6rem;
+        font-size: 2.2rem;
         font-weight: 900;
         color: #00f9ff;
         text-transform: uppercase;
-        letter-spacing: 4px;
-        text-shadow: 0 0 12px #00f9ff, 0 0 32px #00f9ff;
-        margin-bottom: 0.6rem;
-        display: inline-block;
-        position: relative;
-        z-index: 3;
-        white-space: nowrap; /* Keep title on one line */
+        letter-spacing: 3px;
+        text-shadow: 0 0 10px #00f9ff, 0 0 30px #00f9ff;
+        margin: 0 auto 12px auto;
+        max-width: 90%;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.2;
     }}
 
-    .title-emoji {{
-        margin: 0 8px;
-        filter: drop-shadow(0 0 6px #ff0080);
-        vertical-align: middle;
-    }}
-
+    /* Subtitle */
     .tagline {{
-        font-family: 'Brush Script MT', cursive;
-        font-size: 1.8rem;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 1.7rem;
+        font-weight: 600;
         color: #00ffff;
-        text-shadow: 0 0 10px #00ffff, 0 0 24px #00ffff;
-        margin-top: 4px;
-        margin-bottom: 2.2rem;
+        text-shadow: 0 0 8px #00ffff, 0 0 20px #00ffff;
+        margin: 0 auto 30px auto;
+        max-width: 90%;
         white-space: nowrap;
     }}
 
+    /* Cat Image */
     .cat-img {{
         width: 300px !important;
         border-radius: 20px;
         box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
-        margin-bottom: 3.2rem;
+        margin: 0 auto 3rem auto;
         transition: transform 0.3s ease;
         display: block;
-        margin-left: auto;
-        margin-right: auto;
         position: relative;
         z-index: 2;
     }}
@@ -135,136 +97,22 @@ st.markdown(
         transform: scale(1.05);
     }}
 
-    .links {{
-        display: flex;
-        justify-content: center;
-        gap: 40px;
-        font-size: 1.4rem;
-        margin-bottom: 3.4rem;
-        font-weight: 600;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        color: #00f9ff;
-        text-shadow: 0 0 6px #00f9ff;
-        position: relative;
-        z-index: 2;
-    }}
-
-    .links a {{
-        color: #00f9ff;
-        text-decoration: none;
-        padding: 8px 14px;
-        border-radius: 6px;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        font-weight: 700;
-        font-size: 1.2rem;
-    }}
-
-    .links a:hover {{
-        text-shadow: 0 0 10px #ff00aa;
-        color: #ff00aa;
-        transform: scale(1.1);
-    }}
-
-    /* Footer with blue neon glow aligned with subtitle */
+    /* Footer */
     .footer {{
         font-style: italic;
-        font-size: 1.6rem;
+        font-size: 1.4rem;
         color: #00ffff;
-        padding-top: 28px; /* Added spacing from links */
-        animation: glowCycle 7s ease-in-out infinite;
-        text-shadow: 0 0 18px #00ffff;
+        padding-top: 20px;
+        text-shadow: 0 0 15px #00ffff;
         position: relative;
         z-index: 2;
-    }}
-
-    /* Floating emojis container with slower animation and reduced opacity */
-    .floating-icons {{
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 1;
-        overflow: visible;
-    }}
-
-    /* Individual floating emoji styles */
-    .floating-icons span {{
-        position: absolute;
-        font-size: 1.5rem;
-        opacity: 0.5;
-        user-select: none;
-        filter: drop-shadow(0 0 2px #00ffff);
-        animation-timing-function: ease-in-out;
-    }}
-
-    .star {{
-        color: #fffacd;
-        animation: floatUp 20s linear infinite; /* slower */
-    }}
-
-    .heart {{
-        color: #ff4081;
-        animation: floatSide 16s ease-in-out infinite; /* slower */
-    }}
-
-    .play {{
-        color: #00ffea;
-        animation: floatUp 24s linear infinite; /* slower */
-    }}
-
-    .bolt {{
-        color: #ffff00;
-        animation: floatSide 14s ease-in-out infinite; /* slower */
-    }}
-
-    /* Different delays and starting positions */
-    .floating-icons span:nth-child(1) {{
-        top: 90%;
-        left: 20%;
-        animation-delay: 0s;
-        font-size: 1.8rem;
-    }}
-    .floating-icons span:nth-child(2) {{
-        top: 80%;
-        left: 50%;
-        animation-delay: 6s;
-        font-size: 2rem;
-    }}
-    .floating-icons span:nth-child(3) {{
-        top: 85%;
-        left: 70%;
-        animation-delay: 12s;
-        font-size: 1.6rem;
-    }}
-    .floating-icons span:nth-child(4) {{
-        top: 90%;
-        left: 35%;
-        animation-delay: 18s;
-        font-size: 1.7rem;
-    }}
-    .floating-icons span:nth-child(5) {{
-        top: 75%;
-        left: 60%;
-        animation-delay: 3s;
-        font-size: 1.5rem;
-    }}
-    .floating-icons span:nth-child(6) {{
-        top: 80%;
-        left: 40%;
-        animation-delay: 9s;
-        font-size: 1.9rem;
     }}
 
     /* Responsive */
     @media (max-width: 600px) {{
         .emoji-bar {{
-            font-size: 1.6rem;
-            gap: 12px;
+            font-size: 1.4rem;
+            gap: 8px;
         }}
         .title {{
             font-size: 1.8rem;
@@ -273,44 +121,29 @@ st.markdown(
         .tagline {{
             font-size: 1.3rem;
             white-space: normal;
-            margin-bottom: 1.8rem;
+            margin-bottom: 20px;
         }}
         .cat-img {{
             width: 80vw !important;
-            margin-bottom: 1.8rem;
-        }}
-        .links {{
-            gap: 20px;
-            font-size: 1.1rem;
-            flex-wrap: wrap;
-            margin-bottom: 2.6rem;
+            margin-bottom: 1.5rem;
         }}
         .footer {{
-            font-size: 1.3rem;
-            padding-top: 30px;
+            font-size: 1.2rem;
+            padding-top: 15px;
         }}
     }}
-
     </style>
-
-    <div class="floating-icons">
-        <span class="star">✨</span>
-        <span class="heart">💖</span>
-        <span class="play">▶️</span>
-        <span class="bolt">⚡</span>
-        <span class="star">🌟</span>
-        <span class="heart">💗</span>
-    </div>
     """,
     unsafe_allow_html=True,
 )
 
+# Container for all content
 st.markdown('<div class="container">', unsafe_allow_html=True)
 
-# Emoji bar above title
+# Emoji bar inline with title
 st.markdown(
     """
-    <div class="emoji-bar" aria-label="Floating emojis">
+    <div class="emoji-bar" aria-label="Emojis">
         <span>⚡</span>
         <span>❤️</span>
         <span>💔</span>
@@ -320,50 +153,35 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Title with emojis inline and balanced spacing, single line
+# Title text
 st.markdown(
     """
-    <div class="title">
-        ⚡ <span class="title-emoji">❤️</span> DUBZZZ_VALO'S STREAMING HUB <span class="title-emoji">💔</span> ⚡
-    </div>
+    <div class="title">DUBZZZ_VALO'S STREAMING HUB</div>
     """,
     unsafe_allow_html=True,
 )
 
-# Subtitle
+# Subtitle text
 st.markdown(
     """
-    <div class="tagline">
-        Where Every Stream is Legendary ✨
-    </div>
+    <div class="tagline">Where Every Stream is Legendary ✨</div>
     """,
     unsafe_allow_html=True,
 )
 
-# Cat image
-st.markdown(f'<img src="data:image/png;base64,{img_to_base64(cat_img)}" class="cat-img" alt="Cat Image" />', unsafe_allow_html=True)
+# Display cat image with class for styling
+st.markdown(
+    f'<img src="data:image/png;base64,{img_to_base64(cat_img)}" class="cat-img" alt="Cat Image" />',
+    unsafe_allow_html=True,
+)
 
-# Links row
+# Footer
 st.markdown(
     """
-    <div class="links">
-        <a href="https://youtube.com" target="_blank">🎥 YouTube</a>
-        <a href="https://instagram.com" target="_blank">📸 Instagram</a>
-        <a href="https://tiktok.com" target="_blank">🎵 TikTok</a>
-        <a href="https://twitch.tv" target="_blank">🎮 Twitch</a>
-    </div>
+    <div class="footer">© 2025 DUBZZZ_VALO. All Rights Reserved.</div>
     """,
     unsafe_allow_html=True,
 )
 
-# Footer with blue glow and padding above
-st.markdown(
-    """
-    <div class="footer">
-        Thanks for stopping by! Catch more epic streams soon 🙏✨
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-
+# Close container div
 st.markdown('</div>', unsafe_allow_html=True)
