@@ -1,198 +1,179 @@
 import streamlit as st
 import base64
 
-st.set_page_config(page_title="Dubzzz_Valo's Streaming Realm", page_icon="✨", layout="centered")
+st.set_page_config(page_title="Dubzzz_Valo's Streaming Hub", page_icon="🌌", layout="wide")
 
-# Helper function to encode images to base64 for CSS backgrounds
-def img_to_base64(img_path):
-    with open(img_path, "rb") as img_file:
-        return base64.b64encode(img_file.read()).decode()
+st.markdown(
+    """
+    <style>
+    /* Reset margin/padding */
+    body, html, #root, .main {
+        margin: 0; padding: 0; height: 100%; width: 100%; overflow-x: hidden;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #000; color: #fff;
+    }
 
-# Upload widgets to upload your images
-st.markdown("### Upload the starry sky background image (starry_sky.png)")
-starry_sky_file = st.file_uploader("", type=["png", "jpg", "jpeg"], key="starry")
-st.markdown("### Upload the cat profile picture (cat.png)")
-cat_file = st.file_uploader("", type=["png", "jpg", "jpeg"], key="cat")
+    /* Starry background full screen */
+    .starry-bg {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-image: url("data:image/png;base64,{starry_img_base64}");
+        background-size: cover;
+        background-position: center;
+        filter: brightness(0.7);
+        z-index: -1;
+    }
 
-if starry_sky_file and cat_file:
-    # Convert uploaded files to base64
-    starry_img_base64 = base64.b64encode(starry_sky_file.read()).decode()
-    cat_img_base64 = base64.b64encode(cat_file.read()).decode()
+    /* Container centers content and adds padding */
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2rem 1rem 4rem;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
-    # Main CSS styling and animation
-    st.markdown(
-        f"""
-        <style>
-        /* Background starry sky */
-        .stApp {{
-            background: url("data:image/png;base64,{starry_img_base64}") no-repeat center center fixed;
-            background-size: cover;
-            color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow-x: hidden;
-        }}
+    /* Title styling */
+    .title {
+        font-size: 3rem;
+        font-weight: 900;
+        color: #ff6f3c;
+        text-shadow: 0 0 8px #ff6f3c, 0 0 20px #ff6f3c;
+        user-select: none;
+    }
 
-        /* Title styling */
-        .title {{
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: #FF6F00;
-            text-align: center;
-            text-shadow:
-                0 0 5px #FF6F00,
-                0 0 10px #FF6F00,
-                0 0 20px #FF6F00;
-            border-bottom: 3px solid #FF6F00;
-            width: fit-content;
-            margin: 0 auto 30px auto;
-            padding-bottom: 8px;
-            user-select: none;
-        }}
+    /* Sparkle emoji next to title */
+    .sparkle {
+        font-size: 3rem;
+        margin-left: 10px;
+        animation: sparkleAnim 2s infinite;
+    }
+    @keyframes sparkleAnim {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.6; transform: scale(1.3); }
+    }
 
-        /* Centered cat image with shadow */
-        .cat-img {{
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            border-radius: 15px;
-            width: 220px;
-            box-shadow: 0 0 15px rgba(255, 111, 0, 0.8);
-            margin-bottom: 40px;
-        }}
+    /* Tagline below title */
+    .tagline {
+        font-style: italic;
+        margin-top: 0.4rem;
+        margin-bottom: 2rem;
+        font-size: 1.3rem;
+        color: #f1a661cc;
+    }
 
-        /* Social media container */
-        .social-links {{
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            font-weight: 600;
-            font-size: 1.2rem;
-            margin-bottom: 60px;
-            user-select: none;
-        }}
+    /* Cat image styling */
+    .cat-img {
+        width: 180px;
+        height: auto;
+        border-radius: 50%;
+        border: 4px solid #ff6f3c;
+        box-shadow: 0 0 20px #ff6f3caa;
+        margin-bottom: 2rem;
+        user-select: none;
+    }
 
-        .social-links a {{
-            text-decoration: none;
-            color: #b0c4de;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }}
+    /* Links container */
+    .links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 3rem;
+        flex-wrap: wrap;
+    }
 
-        .social-links a:hover {{
-            color: #FF6F00;
-            text-shadow: 0 0 8px #FF6F00;
-            cursor: pointer;
-        }}
+    /* Each link styling */
+    .links a {
+        color: #f1a661dd;
+        font-size: 1.2rem;
+        text-decoration: none;
+        font-weight: 600;
+        padding: 0.5rem 1rem;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        user-select: none;
+        box-shadow: 0 0 10px #f1a66166;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(255, 111, 60, 0.2);
+    }
+    .links a:hover {
+        color: #ff6f3c;
+        background: rgba(255, 111, 60, 0.5);
+        box-shadow: 0 0 20px #ff6f3ccc;
+        transform: scale(1.1);
+    }
 
-        /* Footer styling */
-        .footer {{
-            font-style: italic;
+    /* Footer text styling */
+    .footer {
+        font-size: 1.1rem;
+        color: #ff6f3caa;
+        font-style: italic;
+        user-select: none;
+        text-shadow: 0 0 6px #ff6f3c88;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+        .title {
+            font-size: 2rem;
+        }
+        .cat-img {
+            width: 140px;
+        }
+        .links a {
             font-size: 1rem;
-            color: #e0e0e0;
-            text-align: center;
-            margin-top: 40px;
-            text-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
-            user-select: none;
-        }}
+            padding: 0.4rem 0.8rem;
+        }
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 
-        /* Floating stars animation */
-        @keyframes floatStars {{
-            0% {{
-                transform: translateY(0);
-            }}
-            50% {{
-                transform: translateY(-10px);
-            }}
-            100% {{
-                transform: translateY(0);
-            }}
-        }}
+# --- Image uploaders ---
+starry_img = st.file_uploader("Upload the starry sky background image (starry_sky.png)", type=["png", "jpg"])
+cat_img = st.file_uploader("Upload the cat profile picture (cat.png)", type=["png", "jpg"])
 
-        .star {{
-            position: fixed;
-            background: white;
-            border-radius: 50%;
-            opacity: 0.8;
-            animation: floatStars 4s ease-in-out infinite;
-            pointer-events: none;
-        }}
+def img_to_base64(img_file):
+    return base64.b64encode(img_file.read()).decode()
 
-        .star:nth-child(1) {{
-            width: 4px;
-            height: 4px;
-            top: 15%;
-            left: 10%;
-            animation-delay: 0s;
-        }}
-        .star:nth-child(2) {{
-            width: 3px;
-            height: 3px;
-            top: 40%;
-            left: 30%;
-            animation-delay: 1.5s;
-        }}
-        .star:nth-child(3) {{
-            width: 5px;
-            height: 5px;
-            top: 70%;
-            left: 50%;
-            animation-delay: 3s;
-        }}
-        .star:nth-child(4) {{
-            width: 3px;
-            height: 3px;
-            top: 80%;
-            left: 70%;
-            animation-delay: 4.5s;
-        }}
-        .star:nth-child(5) {{
-            width: 4px;
-            height: 4px;
-            top: 20%;
-            left: 80%;
-            animation-delay: 6s;
-        }}
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
+if starry_img and cat_img:
+    starry_img_base64 = img_to_base64(starry_img)
+    cat_img_base64 = img_to_base64(cat_img)
 
-    # Stars decoration elements
-    for _ in range(5):
-        st.markdown('<div class="star"></div>', unsafe_allow_html=True)
+    # Now inject the base64 into CSS and HTML by rerunning markdown with correct image data
 
-    # Title
-    st.markdown('<h1 class="title">Dubzzz_Valo\'s Streaming Realm — Enter the Purrfect Stream!</h1>', unsafe_allow_html=True)
-
-    # Cat image centered
-    st.markdown(
-        f'<img class="cat-img" src="data:image/png;base64,{cat_img_base64}" alt="Cat profile picture"/>',
-        unsafe_allow_html=True,
-    )
-
-    # Social media links with icons
-    st.markdown(
-        """
-        <div class="social-links">
-            <a href="https://www.youtube.com/" target="_blank">🎥 <strong>YouTube</strong></a>
-            <a href="https://www.instagram.com/" target="_blank">📸 <strong>Instagram</strong></a>
-            <a href="https://www.tiktok.com/" target="_blank">🎵 <strong>TikTok</strong></a>
-            <a href="https://www.twitch.tv/" target="_blank">🎮 <strong>Twitch</strong></a>
+    page_html = f"""
+    <div class="starry-bg"></div>
+    <div class="container">
+        <div>
+            <span class="title">Dubzzz_Valo’s Streaming Galaxy</span><span class="sparkle">✨</span>
         </div>
-        """,
-        unsafe_allow_html=True,
-    )
+        <div class="tagline">Your Gateway to Epic Plays!</div>
 
-    # Footer text with call to action
-    st.markdown(
-        """
+        <img src="data:image/png;base64,{cat_img_base64}" alt="Cat" class="cat-img" />
+
+        <div class="links">
+            <a href="https://youtube.com" target="_blank">🎥 YouTube</a>
+            <a href="https://instagram.com" target="_blank">📸 Instagram</a>
+            <a href="https://tiktok.com" target="_blank">🎵 TikTok</a>
+            <a href="https://twitch.tv" target="_blank">🎮 Twitch</a>
+        </div>
+
         <div class="footer">
-            Thanks for stopping by! Follow for more content 🙏
+            Thanks for dropping by — don’t forget to hit that follow! <span>🙌</span>
         </div>
-        """,
-        unsafe_allow_html=True,
-    )
+    </div>
+    """
+
+    # Display the page HTML
+    st.markdown(page_html, unsafe_allow_html=True)
+
 else:
-    st.info("Please upload both images above to load the streaming page.")
+    st.info("Please upload **both** images above to load the streaming page.")
