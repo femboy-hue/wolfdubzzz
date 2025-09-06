@@ -15,6 +15,8 @@ background_base64 = img_to_base64(background_img)
 st.markdown(
     f"""
     <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Pacifico&display=swap');
+
     .stApp {{
         background-image: url("data:image/png;base64,{background_base64}");
         background-size: cover;
@@ -35,16 +37,22 @@ st.markdown(
         padding: 20px;
     }}
     .title {{
-        font-size: 3rem;
-        font-weight: 700;
-        background: linear-gradient(90deg, #FF4500, #FFA500);
+        font-size: 3.5rem;
+        font-weight: 900;
+        background: linear-gradient(45deg, #FF6B6B, #FFD93D, #6BCB77, #4D96FF);
+        background-size: 300% 300%;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+        animation: gradientShift 8s ease infinite;
+        text-shadow: 0 0 10px rgba(255,255,255,0.8);
         margin-bottom: 2rem;
-        white-space: nowrap; /* keep title in one line */
-        margin-left: auto;
-        margin-right: auto;
+        white-space: nowrap;
+        user-select: none;
+    }}
+    @keyframes gradientShift {{
+        0% {{background-position: 0% 50%;}}
+        50% {{background-position: 100% 50%;}}
+        100% {{background-position: 0% 50%;}}
     }}
     .cat-img {{
         width: 300px !important;
@@ -86,16 +94,37 @@ st.markdown(
         background-color: rgba(135, 206, 250, 0.2);
     }}
     .footer {{
-        font-style: italic;
-        font-size: 1.4rem;
-        color: #ddd;
+        font-family: 'Dancing Script', cursive;
+        font-style: normal;
+        font-size: 1.8rem;
+        color: #FFD700;
         padding-top: 20px;
-        text-shadow: 0 0 6px rgba(255, 165, 0, 0.7);
+        text-shadow:
+            0 0 5px #FFD700,
+            0 0 10px #FFA500,
+            0 0 20px #FF8C00;
+        user-select: none;
+        animation: glow 2.5s ease-in-out infinite alternate;
     }}
-
+    @keyframes glow {{
+        from {{
+            text-shadow:
+                0 0 5px #FFD700,
+                0 0 10px #FFA500,
+                0 0 20px #FF8C00;
+            color: #FFD700;
+        }}
+        to {{
+            text-shadow:
+                0 0 10px #FFFACD,
+                0 0 15px #FFA500,
+                0 0 30px #FF4500;
+            color: #FFFACD;
+        }}
+    }}
     @media (max-width: 600px) {{
         .title {{
-            font-size: 2rem;
+            font-size: 2.5rem;
             white-space: normal;
         }}
         .cat-img {{
@@ -109,7 +138,7 @@ st.markdown(
             margin-bottom: 2rem;
         }}
         .footer {{
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             padding-top: 30px;
         }}
     }}
@@ -133,7 +162,7 @@ st.markdown(
         <a href="https://twitch.tv" target="_blank">🎮 Twitch</a>
     </div>
     <div class="footer">
-        Thanks for stopping by! Follow for more content 🙏
+        Thanks for stopping by! Follow for more awesome streams 🙏✨
     </div>
     """,
     unsafe_allow_html=True,
