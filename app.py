@@ -95,10 +95,13 @@ st.markdown(
         letter-spacing: 4px;
         text-shadow: 0 0 10px #00f9ff, 0 0 30px #00f9ff;
         margin-bottom: 0.3rem;
-        display: inline-block;
+        display: flex;              /* Changed from inline-block to flex */
+        justify-content: center;    /* Center horizontally */
+        align-items: center;        /* Center vertically */
+        gap: 10px;                  /* Space between emojis and text */
+        white-space: nowrap;        /* Keep everything in one line */
         position: relative;
         z-index: 3;
-        white-space: nowrap;  /* ADDED to keep title in one line */
     }}
 
     .title-emoji {{
@@ -114,9 +117,9 @@ st.markdown(
         margin-top: 5px;
         margin-bottom: 1.8rem;
         white-space: nowrap;
-        text-align: center; /* ADDED to center the tagline */
-        margin-left: auto;  /* ADDED to center the tagline */
-        margin-right: auto; /* ADDED to center the tagline */
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
     }}
 
     .cat-img {{
@@ -268,7 +271,7 @@ st.markdown(
         }}
         .title {{
             font-size: 1.8rem;
-            white-space: normal;  /* Let it wrap on smaller screens */
+            white-space: normal;
         }}
         .tagline {{
             font-size: 1.2rem;
@@ -320,11 +323,15 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Title with consistent emojis integrated and no line break
+# Title with consistent emojis integrated and no line break, now flex-centered
 st.markdown(
     """
     <div class="title">
-        ⚡ <span class="title-emoji">❤️</span> DUBZZZ_VALO'S STREAMING HUB <span class="title-emoji">💔</span> ⚡
+        <span>⚡</span>
+        <span class="title-emoji">❤️</span>
+        <span>DUBZZZ_VALO'S STREAMING HUB</span>
+        <span class="title-emoji">💔</span>
+        <span>⚡</span>
     </div>
     """,
     unsafe_allow_html=True,
