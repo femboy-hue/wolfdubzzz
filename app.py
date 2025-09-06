@@ -77,13 +77,13 @@ st.markdown(
     }}
 
     .title {{
-        font-size: 3rem;
+        font-size: 2.4rem; /* smaller size */
         font-weight: 900;
         color: #00f9ff;
         text-transform: uppercase;
         letter-spacing: 4px;
         text-shadow: 0 0 10px #00f9ff, 0 0 30px #00f9ff;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
         position: relative;
         display: inline-block;
         z-index: 3;
@@ -95,6 +95,10 @@ st.markdown(
         color: #ff0080;
         text-shadow: 0 0 6px #ff0080;
         margin-bottom: 2rem;
+        text-align: right;       /* align right */
+        max-width: 50%;          /* limit width to about half container */
+        margin-left: auto;       /* push it to the right */
+        margin-right: 0;
     }}
 
     .cat-img {{
@@ -243,6 +247,11 @@ st.markdown(
         .title {{
             font-size: 2rem;
             white-space: normal;
+        }}
+        .tagline {{
+            max-width: 100%;
+            text-align: center;
+            margin-left: 0;
         }}
         .cat-img {{
             width: 80vw !important;
