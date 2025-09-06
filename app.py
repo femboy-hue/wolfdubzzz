@@ -8,8 +8,8 @@ def img_to_base64(img):
     img.save(buffered, format="PNG")
     return base64.b64encode(buffered.getvalue()).decode()
 
-# Load new cat image - use full path to avoid FileNotFoundError
-cat_img = Image.open("/mnt/data/6ad72f1d-0624-4cc8-b781-29bf5e3a9685.png")
+# Load images with correct filenames
+cat_img = Image.open("cat.png")  # <-- fixed here
 background_img = Image.open("skye.png")
 background_base64 = img_to_base64(background_img)
 
@@ -336,7 +336,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# New cat image
+# Cat image
 st.markdown(f'<img src="data:image/png;base64,{img_to_base64(cat_img)}" class="cat-img" alt="Cat Image" />', unsafe_allow_html=True)
 
 # Links row
