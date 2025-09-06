@@ -1,5 +1,14 @@
 import streamlit as st
 from PIL import Image
+import base64
+from io import BytesIO
+
+# Helper function to convert image to base64
+def starry_img_to_base64(img):
+    buffered = BytesIO()
+    img.save(buffered, format="PNG")
+    img_bytes = buffered.getvalue()
+    return base64.b64encode(img_bytes).decode()
 
 # Load images
 cat_img = Image.open("cat.png")
@@ -53,16 +62,6 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-
-
-# Helper function to convert image to base64
-def starry_img_to_base64(img):
-    import base64
-    from io import BytesIO
-    buffered = BytesIO()
-    img.save(buffered, format="PNG")
-    img_bytes = buffered.getvalue()
-    return base64.b64encode(img_bytes).decode()
 
 # Title and cat image centered
 st.markdown(
