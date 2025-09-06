@@ -8,21 +8,22 @@ def img_to_base64(img):
     img.save(buffered, format="PNG")
     return base64.b64encode(buffered.getvalue()).decode()
 
-# Load images with correct filenames
-cat_img = Image.open("cat.png")  # <-- fixed here
+# Load images
+cat_img = Image.open("cat.png")
 background_img = Image.open("skye.png")
 background_base64 = img_to_base64(background_img)
 
 st.markdown(
     f"""
     <style>
+    /* Slower and smoother emoji float animation */
     @keyframes floatUp {{
         0% {{
             transform: translateY(0) translateX(0);
             opacity: 1;
         }}
         100% {{
-            transform: translateY(-100px) translateX(20px);
+            transform: translateY(-60px) translateX(15px);
             opacity: 0;
         }}
     }}
@@ -33,7 +34,7 @@ st.markdown(
             opacity: 1;
         }}
         50% {{
-            transform: translateX(10px);
+            transform: translateX(6px);
         }}
         100% {{
             transform: translateX(0);
@@ -72,7 +73,7 @@ st.markdown(
     .container {{
         text-align: center;
         max-width: 800px;
-        padding: 20px;
+        padding: 30px 20px 40px 20px; /* More padding bottom */
         position: relative;
         z-index: 2;
     }}
@@ -81,37 +82,39 @@ st.markdown(
     .emoji-bar {{
         display: flex;
         justify-content: center;
-        gap: 20px;
-        font-size: 2rem;
-        margin-bottom: 10px;
-        filter: drop-shadow(0 0 4px #00ffff);
+        gap: 18px;
+        font-size: 1.8rem;
+        margin-bottom: 14px;
+        filter: drop-shadow(0 0 3px #00ffff);
     }}
 
     .title {{
-        font-size: 2.4rem;
+        font-size: 2.6rem;
         font-weight: 900;
         color: #00f9ff;
         text-transform: uppercase;
         letter-spacing: 4px;
-        text-shadow: 0 0 10px #00f9ff, 0 0 30px #00f9ff;
-        margin-bottom: 0.3rem;
+        text-shadow: 0 0 12px #00f9ff, 0 0 32px #00f9ff;
+        margin-bottom: 0.6rem;
         display: inline-block;
         position: relative;
         z-index: 3;
+        white-space: nowrap; /* Keep title on one line */
     }}
 
     .title-emoji {{
-        margin: 0 6px;
+        margin: 0 8px;
         filter: drop-shadow(0 0 6px #ff0080);
+        vertical-align: middle;
     }}
 
     .tagline {{
         font-family: 'Brush Script MT', cursive;
-        font-size: 1.6rem;
+        font-size: 1.8rem;
         color: #00ffff;
-        text-shadow: 0 0 8px #00ffff, 0 0 20px #00ffff;
-        margin-top: 5px;
-        margin-bottom: 1.8rem;
+        text-shadow: 0 0 10px #00ffff, 0 0 24px #00ffff;
+        margin-top: 4px;
+        margin-bottom: 2.2rem;
         white-space: nowrap;
     }}
 
@@ -119,7 +122,7 @@ st.markdown(
         width: 300px !important;
         border-radius: 20px;
         box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
-        margin-bottom: 2.5rem;
+        margin-bottom: 3.2rem;
         transition: transform 0.3s ease;
         display: block;
         margin-left: auto;
@@ -137,7 +140,7 @@ st.markdown(
         justify-content: center;
         gap: 40px;
         font-size: 1.4rem;
-        margin-bottom: 3rem;
+        margin-bottom: 3.4rem;
         font-weight: 600;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         color: #00f9ff;
@@ -149,7 +152,7 @@ st.markdown(
     .links a {{
         color: #00f9ff;
         text-decoration: none;
-        padding: 8px 12px;
+        padding: 8px 14px;
         border-radius: 6px;
         transition: all 0.3s ease;
         display: flex;
@@ -165,18 +168,19 @@ st.markdown(
         transform: scale(1.1);
     }}
 
+    /* Footer with blue neon glow aligned with subtitle */
     .footer {{
         font-style: italic;
         font-size: 1.6rem;
         color: #00ffff;
-        padding-top: 20px;
-        animation: glowCycle 5s ease-in-out infinite;
-        text-shadow: 0 0 15px #00ffff;
+        padding-top: 28px; /* Added spacing from links */
+        animation: glowCycle 7s ease-in-out infinite;
+        text-shadow: 0 0 18px #00ffff;
         position: relative;
         z-index: 2;
     }}
 
-    /* Floating emojis container */
+    /* Floating emojis container with slower animation and reduced opacity */
     .floating-icons {{
         position: absolute;
         top: 0;
@@ -188,11 +192,11 @@ st.markdown(
         overflow: visible;
     }}
 
-    /* Individual floating emoji styles with different animations and delays */
+    /* Individual floating emoji styles */
     .floating-icons span {{
         position: absolute;
         font-size: 1.5rem;
-        opacity: 0.8;
+        opacity: 0.5;
         user-select: none;
         filter: drop-shadow(0 0 2px #00ffff);
         animation-timing-function: ease-in-out;
@@ -200,22 +204,22 @@ st.markdown(
 
     .star {{
         color: #fffacd;
-        animation: floatUp 10s linear infinite;
+        animation: floatUp 20s linear infinite; /* slower */
     }}
 
     .heart {{
         color: #ff4081;
-        animation: floatSide 8s ease-in-out infinite;
+        animation: floatSide 16s ease-in-out infinite; /* slower */
     }}
 
     .play {{
         color: #00ffea;
-        animation: floatUp 12s linear infinite;
+        animation: floatUp 24s linear infinite; /* slower */
     }}
 
     .bolt {{
         color: #ffff00;
-        animation: floatSide 7s ease-in-out infinite;
+        animation: floatSide 14s ease-in-out infinite; /* slower */
     }}
 
     /* Different delays and starting positions */
@@ -228,31 +232,31 @@ st.markdown(
     .floating-icons span:nth-child(2) {{
         top: 80%;
         left: 50%;
-        animation-delay: 3s;
+        animation-delay: 6s;
         font-size: 2rem;
     }}
     .floating-icons span:nth-child(3) {{
         top: 85%;
         left: 70%;
-        animation-delay: 6s;
+        animation-delay: 12s;
         font-size: 1.6rem;
     }}
     .floating-icons span:nth-child(4) {{
         top: 90%;
         left: 35%;
-        animation-delay: 9s;
+        animation-delay: 18s;
         font-size: 1.7rem;
     }}
     .floating-icons span:nth-child(5) {{
         top: 75%;
         left: 60%;
-        animation-delay: 1.5s;
+        animation-delay: 3s;
         font-size: 1.5rem;
     }}
     .floating-icons span:nth-child(6) {{
         top: 80%;
         left: 40%;
-        animation-delay: 4.5s;
+        animation-delay: 9s;
         font-size: 1.9rem;
     }}
 
@@ -260,29 +264,29 @@ st.markdown(
     @media (max-width: 600px) {{
         .emoji-bar {{
             font-size: 1.6rem;
-            gap: 10px;
+            gap: 12px;
         }}
         .title {{
             font-size: 1.8rem;
             white-space: normal;
         }}
         .tagline {{
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             white-space: normal;
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.8rem;
         }}
         .cat-img {{
             width: 80vw !important;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.8rem;
         }}
         .links {{
             gap: 20px;
             font-size: 1.1rem;
             flex-wrap: wrap;
-            margin-bottom: 2rem;
+            margin-bottom: 2.6rem;
         }}
         .footer {{
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             padding-top: 30px;
         }}
     }}
@@ -303,10 +307,10 @@ st.markdown(
 
 st.markdown('<div class="container">', unsafe_allow_html=True)
 
-# Emojis above title - consistent set (lightning, hearts, play)
+# Emoji bar above title
 st.markdown(
     """
-    <div class="emoji-bar">
+    <div class="emoji-bar" aria-label="Floating emojis">
         <span>⚡</span>
         <span>❤️</span>
         <span>💔</span>
@@ -316,7 +320,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Title with consistent emojis integrated and no line break
+# Title with emojis inline and balanced spacing, single line
 st.markdown(
     """
     <div class="title">
@@ -326,7 +330,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Subtitle with neon glow, no background highlight, smaller font, closer spacing
+# Subtitle
 st.markdown(
     """
     <div class="tagline">
@@ -352,7 +356,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Footer with softer neon cyan glow color
+# Footer with blue glow and padding above
 st.markdown(
     """
     <div class="footer">
