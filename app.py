@@ -1,56 +1,67 @@
 import streamlit as st
 
-st.set_page_config(page_title="Dubzzz_Valo's Streaming Hub", page_icon="🐾")
+# Set page config
+st.set_page_config(page_title="Dubzzz_Valo's Streaming Hub", page_icon="🐾", layout="wide")
 
-# CSS styles
+# Custom CSS for styling
 st.markdown("""
 <style>
-/* Full-screen starry sky background */
+/* Full screen starry night background */
 body, .main {
     margin: 0; padding: 0;
     height: 100vh;
-    background: url('https://i.imgur.com/d06d0e8c-1389-491f-82cb-adfcdb3ff456.png') no-repeat center center fixed;
+    background: url('https://i.imgur.com/c1da0445-2828-4479-abf4-b17485e1707c.png') no-repeat center center fixed;
     background-size: cover;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: white;
+    color: #fff;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
 }
 
-/* Profile pic */
+/* Container for top content */
+.top-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 60px 0 60px;
+}
+
+/* Profile pic top right */
 .profile-pic {
-    width: 180px;
-    height: 180px;
-    border-radius: 90px;
-    border: 3px solid #ee0979;
-    box-shadow: 0 0 15px 6px rgba(255, 106, 0, 0.6); /* softer orange glow */
-    margin-top: 40px;
+    width: 160px;
+    height: 160px;
+    border-radius: 80px;
+    border: 3px solid #ff6a00;
+    box-shadow: 0 0 20px 10px rgba(255, 106, 0, 0.8);
     object-fit: cover;
 }
 
-/* Title */
+/* Title styling */
 .title {
-    font-size: 48px;
+    font-size: 64px;
     font-weight: 900;
-    margin-top: 25px;
-    margin-bottom: 25px;
     background: linear-gradient(90deg, #ff6a00, #ee0979);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-align: center;
     user-select: none;
+    max-width: 60vw;
+    text-align: left;
+    padding-right: 40px;
 }
 
-/* Links container */
-.links {
-    background: rgba(0, 0, 0, 0.35);
-    padding: 25px 40px;
-    border-radius: 15px;
-    box-shadow: 0 0 15px rgba(255, 106, 0, 0.3);
+/* Links container centered */
+.links-container {
     display: flex;
-    flex-direction: column;
-    gap: 18px; /* uniform vertical spacing */
-    max-width: 280px;
-    wi
+    justify-content: center;
+    margin: 40px 0 60px 0;
+    gap: 45px;
+}
+
+/* Link styling */
+.link {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ff6a00;
+    text-decoration: none;
+    transition: transform 0.3s
