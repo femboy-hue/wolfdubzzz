@@ -1,9 +1,3 @@
-st.markdown(
-    """
-    <meta name="google-site-verification" content="OMIx9rfo2xbut1HKaovSKzBKfCjrmugePa6gSKlHvB8" />
-    """,
-    unsafe_allow_html=True,
-)
 import streamlit as st
 from PIL import Image
 import base64
