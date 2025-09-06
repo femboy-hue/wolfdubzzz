@@ -1,13 +1,11 @@
 import streamlit as st
 
-# Set page layout
+# Set wide page layout
 st.set_page_config(layout="wide")
 
-# Paths to your uploaded images
 star_bg_path = "/mnt/data/starry_sky.png"
 cat_img_path = "/mnt/data/cat.png"
 
-# CSS for layout and styling
 st.markdown(f"""
 <style>
 body {{
@@ -123,9 +121,8 @@ a:hover {{
     }}
 }}
 </style>
-""", unsafe_allow_html=True)
 
-# Main HTML content with images inserted
-st.markdown(f"""
 <div class="main">
-  <div class=
+  <div class="container">
+    <div class="left">
+      <h1 class="title">🐾 Dub
