@@ -3,91 +3,84 @@ from PIL import Image
 import base64
 from io import BytesIO
 
-# Helper function to convert image to base64
-def starry_img_to_base64(img):
+def img_to_base64(img):
     buffered = BytesIO()
     img.save(buffered, format="PNG")
-    img_bytes = buffered.getvalue()
-    return base64.b64encode(img_bytes).decode()
+    return base64.b64encode(buffered.getvalue()).decode()
 
 # Load images
 cat_img = Image.open("cat.png")
-starry_img = Image.open("starry_sky.png")
+background_img = Image.open("skye.png")
 
-# Inject CSS for full background image and centering cat image
+background_base64 = img_to_base64(background_img)
+
+# Apply CSS styles
 st.markdown(
     f"""
     <style>
-    /* Full screen starry sky background */
     .stApp {{
-        background-image: url("data:image/png;base64,{starry_img_to_base64(starry_img)}");
+        background-image: url("data:image/png;base64,{background_base64}");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
+        height: 100vh;
+        margin: 0;
     }}
-
-    /* Container for centering cat and text */
     .center-container {{
+        height: 100vh;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 80vh;
+        justify-content: center;  /* vertical centering */
+        align-items: center;      /* horizontal centering */
         color: white;
         text-align: center;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
     }}
-
-    /* Title style */
     .title {{
-        font-size: 2.5rem;
-        font-weight: bold;
+        font-size: 3rem;
+        font-weight: 700;
         color: #FF4500;
-        text-shadow: 2px 2px 4px black;
-        margin-bottom: 1rem;
+        margin-bottom: 2rem;
     }}
-
-    /* Links style */
     .links a {{
-        color: #87CEFA;
         margin: 0 15px;
-        font-size: 1.2rem;
+        font-size: 1.3rem;
+        color: #87CEFA;
         text-decoration: none;
     }}
-
     .footer {{
-        font-style: italic;
         margin-top: 2rem;
+        font-style: italic;
+        font-size: 1rem;
     }}
     </style>
     """,
     unsafe_allow_html=True,
 )
 
-# Title and cat image centered
-st.markdown(
-    """
-    <div class="center-container">
-        <div class="title">🐾 Dubzzz_Valo's Streaming Hub 🌟</div>
-    """,
-    unsafe_allow_html=True,
-)
+# Main container
+st.markdown('<div class="center-container">', unsafe_allow_html=True)
 
+# Title on top
+st.markdown('<div class="title">🐾 Dubzzz_Valo\'s Streaming Hub 🌟</div>', unsafe_allow_html=True)
+
+# Centered cat image
 st.image(cat_img, width=250, caption="Cat", output_format="PNG")
 
 # Links below cat image
 st.markdown(
     """
-        <div class="links">
-            🎥 <a href="https://youtube.com" target="_blank">YouTube</a>
-            📸 <a href="https://instagram.com" target="_blank">Instagram</a>
-            🎵 <a href="https://tiktok.com" target="_blank">TikTok</a>
-            🎮 <a href="https://twitch.tv" target="_blank">Twitch</a>
-        </div>
-
-        <div class="footer">
-            Thanks for stopping by! Follow for more content 🙏
-        </div>
+    <div class="links">
+        🎥 <a href="https://youtube.com" target="_blank">YouTube</a>
+        📸 <a href="https://instagram.com" target="_blank">Instagram</a>
+        🎵 <a href="https://tiktok.com" target="_blank">TikTok</a>
+        🎮 <a href="https://twitch.tv" target="_blank">Twitch</a>
+    </div>
+    <div class="footer">
+        Thanks for stopping by! Follow for more content 🙏
     </div>
     """,
     unsafe_allow_html=True,
 )
+
+st.markdown('</div>', unsafe_allow_html=True)
